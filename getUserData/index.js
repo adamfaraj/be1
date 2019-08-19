@@ -4,6 +4,8 @@ const AWS = require('aws-sdk');
 AWS.config.update({region: "us-east-1"});
 
 const ddb = new AWS.DynamoDB();
+const docClient = new AWS.DynamoDB.DocumentClient();
+
 const tableName = 'users';
 
 exports.handler = function (event, context, callback) {
@@ -13,14 +15,10 @@ exports.handler = function (event, context, callback) {
     // context.fail('Failed!')
     const params = {
       TableName: tableName,
-      Key:{
-        userId: {
-          N: "3",
-        }
-      }
+      Key:{"userId": 3}
     };
 
-    ddb.getItem(params, function(err, data) {
+    docClient.get(params, function(err, data) {
       if (err) {
         console.error('Unable to get user data', JSON.stringify(err, null, 2))
       } else {
