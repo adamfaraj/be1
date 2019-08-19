@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/adamfaraj/be1/issues"
   },
-  "homepage": "https://github.com/adamfaraj/be1#readme"
+  "homepage": "https://github.com/adamfaraj/be1#readme",
+  "dependencies": {
+    "npm": "^6.10.3"
+  }
 }
