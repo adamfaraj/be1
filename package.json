@@ -1,0 +1,19 @@
+{
+  "name": "be1",
+  "version": "1.0.0",
+  "description": "be practice",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adamfaraj/be1.git"
+  },
+  "author": "Adam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adamfaraj/be1/issues"
+  },
+  "homepage": "https://github.com/adamfaraj/be1#readme"
+}
