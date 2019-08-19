@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/adamfaraj/be1#readme",
   "dependencies": {
+    "aws-sdk": "^2.512.0",
     "npm": "^6.10.3"
   }
 }
