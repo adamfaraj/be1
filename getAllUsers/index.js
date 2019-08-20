@@ -12,21 +12,17 @@ exports.handler = async (event, context) => {
   let responseBody = "";
   let statusCode;
 
-  const { id } = event.pathParameters;
 
   const params = {
     TableName: tableName,
-    Key: {
-      userId: parseFloat(id),
-    }
   };
-
+  
   try {
-    const data = await docClient.get(params).promise();
-    responseBody = JSON.stringify(data.Item);
+    const data = await docClient.scan(params).promise();
+    responseBody = JSON.stringify(data);
     statusCode = 200;
   } catch (err) {
-    responseBody = 'Unable to get user data';
+    responseBody = `Unable to get user data ${err}`;
     statusCode = 403;
   }
 
