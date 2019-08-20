@@ -8,22 +8,39 @@ const docClient = new AWS.DynamoDB.DocumentClient();
 
 const tableName = 'users';
 
-exports.handler = function (event, context, callback) {
+exports.handler = async (event, context) => {
     // console.log(JSON.stringify(`Event: event`))
     // Lambda Code Here
     // context.succeed('Success!')
     // context.fail('Failed!')
-    const params = {
-      TableName: tableName,
-      Key:{"userId": 3}
-    };
+  let responseBody = "";
+  let statusCode;
 
-    docClient.get(params, function(err, data) {
-      if (err) {
-        console.error('Unable to get user data', JSON.stringify(err, null, 2))
-      } else {
-        console.log('User data', JSON.stringify(data, null, 2));
-      }
-    })
+  const { id } = event.pathParameters;
 
+  const params = {
+    TableName: tableName,
+    Key: {
+      userId: parseFloat(id),
+    }
+  };
+
+  try {
+    const data = await docClient.get(params).promise();
+    responseBody = JSON.stringify(data.Item);
+    statusCode = 200;
+  } catch (err) {
+    responseBody = 'Unable to get user data';
+    statusCode = 403;
+  }
+
+  const response = {
+    statusCode: statusCode,
+    headers: {
+      "myHeader": "test",
+    },
+    body: responseBody
+  }
+
+  return response;
 }
